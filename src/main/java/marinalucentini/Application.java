@@ -31,9 +31,11 @@ public class Application {
                                 .mapToDouble(Product::getPrice)
                                 .sum())));
         salesByCustomer.forEach((customer, totalSales) -> {
-            
+
             System.out.println("Customer: " + customer + ", Total Sales: " + totalSales);
         });
+        OptionalDouble productExpansive = productList.stream().mapToDouble(product -> product.getPrice()).max();
+        System.out.println(productExpansive);
     }
 
     public static Cathegory randomcathegory() {
