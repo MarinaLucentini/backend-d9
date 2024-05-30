@@ -25,7 +25,15 @@ public class Application {
         System.out.println(orderList);
         Map<Customer, List<Order>> ordersByCustomers = orderList.stream().collect(Collectors.groupingBy(customer -> customer.getCustomer()));
         System.out.println(ordersByCustomers);
-        
+        Map<Customer, Double> salesByCustomer = orderList.stream()
+                .collect(Collectors.groupingBy(customer -> customer.getCustomer(),
+                        Collectors.summingDouble(order -> order.getProducts().stream()
+                                .mapToDouble(Product::getPrice)
+                                .sum())));
+        salesByCustomer.forEach((customer, totalSales) -> {
+            
+            System.out.println("Customer: " + customer + ", Total Sales: " + totalSales);
+        });
     }
 
     public static Cathegory randomcathegory() {
