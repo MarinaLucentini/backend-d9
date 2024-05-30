@@ -30,12 +30,16 @@ public class Application {
                         Collectors.summingDouble(order -> order.getProducts().stream()
                                 .mapToDouble(Product::getPrice)
                                 .sum())));
+
         salesByCustomer.forEach((customer, totalSales) -> {
 
             System.out.println("Customer: " + customer + ", Total Sales: " + totalSales);
         });
+        List<Product> productMoreExpansive = productList.stream().sorted(Comparator.comparingDouble(Product::getPrice).reversed()).limit(5).toList();
         OptionalDouble productExpansive = productList.stream().mapToDouble(product -> product.getPrice()).max();
         System.out.println(productExpansive);
+        System.out.println(productMoreExpansive);
+        
     }
 
     public static Cathegory randomcathegory() {
